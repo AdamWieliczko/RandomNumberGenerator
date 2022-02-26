@@ -7,7 +7,6 @@ import matplotlib.pyplot as plt
 import scipy.stats
 
 
-
 def G(seed=5, fact = 17713, con = 11, div = 2147483647):
     #Generator liczb całkowitych o rozkładzie równomiernym
 
@@ -49,7 +48,6 @@ def D(seed = 5, p = 0.5, n = 10, fact = 17713, con = 11, div = 2147483647):
 
     result = 0
     i = 1
-
     U = J(seed, fact, con, div)
 
     while i < n:
@@ -92,13 +90,6 @@ def N(seed = 5, seedTwo = 5, factToN = 17, conToN = 11, fact = 17713, con = 11, 
     UOne = math.sqrt((-2) * math.log(UOne))
     UTwo = 2 * math.pi * UTwo
     return ((UOne * math.cos(UTwo)) * factToN + conToN)
-
-def pointsGenerator(seed = 12):
-    result = G(seed)
-    result = result % 13
-
-    return result
-
 
 def SeriesTest(seed, n, whatGen):
     whatSeed = seed
@@ -152,12 +143,13 @@ def SeriesTest(seed, n, whatGen):
 
 
 
-def MMVKtest(seed, n, whatGen=G, first=0, second=0):
+def MMVKtest(seed, n, whatGen=G, first=0, second=0): #własny test sprawdzający medianę, średnią, wariancję i kurtozę (MMVK to ich pierwsze litery po angielsku)
 
     whatSeed = seed
     arr = []
 
     for i in range(0, n):
+
         if whatGen == 'G':
             arr.append(G(whatSeed, 17713, 11, first))
         elif whatGen == 'J':
@@ -172,6 +164,7 @@ def MMVKtest(seed, n, whatGen=G, first=0, second=0):
             arr.append(W(whatSeed, first))
         elif whatGen == 'N':
             arr.append(N(whatSeed, first, second))
+
 
         whatSeed = G(whatSeed, 17713, 11)
 
@@ -229,8 +222,9 @@ def MMVKtest(seed, n, whatGen=G, first=0, second=0):
 
     print()
 
-"""
+
 #PRZYKLADOWE WYNIKI + HISTOGRAMY
+"""
 
 whatSeed = 100
 arr = []
